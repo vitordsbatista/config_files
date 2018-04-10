@@ -21,3 +21,8 @@ apt-get install ranger rofi firefox mesa-utils mesa-utils-extra pulseaudio nitro
 cp -R i3 ~/.config
 cp -R ranger ~/.config
 cp .Xdefaults ~/
+mkdir ~/.fonts
+cp fonts/* ~/.fonts
+
+#Configurations
+# temperature
