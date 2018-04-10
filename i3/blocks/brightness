@@ -1,0 +1,46 @@
+#!/bin/bash
+
+URGENT_VALUE=10
+
+per=$(echo "scale=0;$(xbacklight -get)" | bc -l)
+per=${per%.*}
+
+if [[ "${BLOCK_BUTTON}" -eq 4 ]]; then
+  xbacklight -inc 13 -time 0
+fi
+if [[ "${per}" -ge "${URGENT_VALUE}" ]]; then
+  #Scroll
+  if [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
+    xbacklight -dec 13 -time 0
+  fi
+fi
+per=$(echo "scale=0;$(xbacklight -get)" | bc -l)
+per=${per%.*}
+
+echo ${per}%
+
+if [[ "${per}" -le "${URGENT_VALUE}" ]]; then
+  exit 33
+fi
+
+#curBrightness=$(xbacklight -get)
+#percent=$(echo "scale=0;${curBrightness}" | bc -l)
+#percent=${percent%.*}
+
+#Scroll
+#if [[ "${BLOCK_BUTTON}" -eq 4 ]]; then
+#  xbacklight -inc 10
+#  percent=$(percent) + 10
+#elif [[ "${percent}" -gt 10 ]]; then
+#  if [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
+#    xbacklight -dec 10
+#    percent=$(percent) - 10
+#  fi
+#fi
+
+#echo "${percent}%"
+#echo ""
+
+#if [[ "${percent}" -le "${URGENT_VALUE}" ]]; then
+#  exit 33
+#fi

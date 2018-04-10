@@ -1,0 +1,6 @@
+#!/bin/bash
+PLAYER="${BLOCK_INSTANCE}"
+case $BLOCK_BUTTON in
+	1) playerctl --player=${PLAYER} next
+esac
+echo ">>"

@@ -1,0 +1,54 @@
+#!/bin/bash
+
+MAX=105
+MIN=25
+TEMP_DEVICE="${BLOCK_INSTANCE:-Core}"
+TEMP_OUTPUT=$(sensors | grep "${TEMP_DEVICE}")
+
+IS_URGENT=0
+
+TOTAL_TEMP=0
+TOTAL_COUNT=0
+while read RESULT_LINE; do
+  TOTAL_COUNT=$((TOTAL_COUNT +1))
+  CURRENT_TEMP=$(echo "${RESULT_LINE}" | grep -o -E "[\+\-]?[0-9]*.[0-9]*°C" | sed -n '1p' | tr -d '+°C')
+  URGENT_VALUE=$(echo "${RESULT_LINE}" | grep -o -E "[\+\-]?[0-9]*.[0-9]*°C" | sed -n '2p' | tr -d '+°C')
+
+  TOTAL_TEMP=$(echo "scale=2;${TOTAL_TEMP}+${CURRENT_TEMP}" | bc -l)
+  IS_CRITICAL=$(echo "scale=0;${CURRENT_TEMP}-${URGENT_VALUE} >= 0" | bc -l)
+
+  if [[ "${IS_CRITICAL}" -eq 1 ]]; then
+    IS_URGENT=1
+  fi
+done <<< "$(echo -e "$TEMP_OUTPUT")"
+
+AVERAGE_TEMP=$(echo "scale=0;${TOTAL_TEMP}/${TOTAL_COUNT}" | bc -l)
+
+if [[ "${TOTAL_COUNT}" -gt 1 ]]; then
+  AVERAGE_TEMP="${AVERAGE_TEMP}"
+fi
+
+# Minhas alteracoes
+THERM_0=""
+THERM_1=""
+THERM_2=""
+THERM_3=""
+THERM_4=""
+QUA=$(((MAX-MIN)/3))
+if [[ $AVERAGE_TEMP -lt $MIN ]]; then
+ICON=${THERM_0}
+elif [[ $AVERAGE_TEMP -le $((MIN+QUA)) ]]; then
+ICON=${THERM_1}
+elif [[ $AVERAGE_TEMP -le $((MIN+QUA*2)) ]]; then
+ICON=${THERM_2}
+elif [[ $AVERAGE_TEMP -le $((MIN+QUA*3)) ]]; then
+ICON=${THERM_3}
+else
+ICON=${THERM_4}
+fi
+
+echo "$ICON ${AVERAGE_TEMP}°C"
+
+if [[ "${IS_URGENT}" -eq 1 ]]; then
+  exit 33
+fi

@@ -1,0 +1,13 @@
+#!/bin/bash
+PLAYER="${BLOCK_INSTANCE}"
+case $BLOCK_BUTTON in
+  1) playerctl -p ${PLAYER} play-pause
+esac
+STATUS="$(playerctl -p ${PLAYER} status)"
+if [ "$STATUS" = "Playing" ]; then
+	ICON=""
+else
+	ICON=""
+fi
+
+echo "${ICON}"

@@ -1,0 +1,4 @@
+#!/bin/bash
+PLAYER="${BLOCK_INSTANCE}"
+MUSIC="$(playerctl -p ${PLAYER} metadata title)"
+echo "${MUSIC}"

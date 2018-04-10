@@ -1,0 +1,41 @@
+# Instalação do sistema operacional
+
+1. Instalar o Ubuntu Minimal normalmente, sem pacotes adicionais
+2. Instalar o lightdm, com o GTK
+	# apt-get install lightdm lightdm-gtk-greeter
+3. Instalar o i3 e seus pacotes
+	# apt-get install i3 i3-wm i3lock i3bar i3blocks i3status
+	NOTA: verificar a diferença entre i3 e i3-wm
+4. Reinicia o sistema
+	$ sudo reboot
+5. Instala os pacotes adicionais
+	$ sudo apt-get install ranger rofi firefox mesa-utils mesa-utils-extra pulseaudio nitrogen neofetch redshift htop clementine mpv git vim gimp transmission-gtk clementine
+
+6. Instalar os programas que não tem no repositório
+	-anaconda (realizar as configurações do anaconda)
+	-playerctl
+	-kdenlive
+	-matlab (odeio esse programa)
+
+7. Importar os arquivos de configuração que estão no github e executar o script para colocar eles no lugar
+	$ git clone config-files
+	$ cd config-files && chmod +x config-files-instalation.sh %% ./config-files-instalation.sh
+
+
+#Opcional
+a. Instalar o xbacklight (gerenciador de luminosidade - notebooks)
+	#apt-get install
+
+# Bibliotecas do python
+	$ pip install
+
+##remover após esta linha##
+#arquivos de configurações que preciso colocar no github
+#i3
+/home/user/.config/i3/*
+#ranger
+/home/user/.config/ranger/*.conf
+#urxvt
+/home/user/.Xdefaults
+#Adicionar o neofetch ao final da linha do .bashrc no /home/user/
+echo "neofetch" >> /home/user/.bashrc

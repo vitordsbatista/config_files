@@ -1,0 +1,238 @@
+#  _ _____                    __ _          __ _ _       #
+# (_)___ /    ___ ___  _ __  / _(_) __ _   / _(_) | ___  #
+# | | |_ \   / __/ _ \| '_ \| |_| |/ _` | | |_| | |/ _ \ #
+# | |___) | | (_| (_) | | | |  _| | (_| | |  _| | |  __/ #
+# |_|____/   \___\___/|_| |_|_| |_|\__, | |_| |_|_|\___| #
+#                                  |___/                 #
+
+# Variables
+#Mod - windows key
+set $mod Mod4
+
+#Black
+set $bg-color 	         #333333
+set $inactive-bg-color   #333333
+
+# White
+set $text-color          #f3f4f5
+
+# Gray
+set $inactive-text-color #878585
+
+# Dark Gray
+set $urgent-bg-color     #333333 
+
+# Red/Orange
+set $indicator-color 	 #d64937
+
+
+# Configurations
+#Hide borders
+hide_edge_borders vertical
+
+#Popups
+popup_during_fullscreen smart
+
+#FLoating modifier
+floating_modifier $mod
+
+#Font
+# font pango:Iosevka Medium 10
+font pango:System San Francisco Display 11
+
+#Workspaces names
+set $workspece1 "1 "
+set $workspece2 "2 "
+set $workspece3 "3 "
+set $workspece4 "4"
+set $workspece5 "5"
+set $workspece6 "6"
+set $workspece7 "7"
+set $workspece8 "8"
+set $workspece9 "9"
+set $workspece10 "10 "
+
+#i3 blocks
+bar {
+	status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	colors {    
+	    background #333333
+	    statusline #dedede
+				#Border   #Background 	#Foreground
+	    focused_workspace 	#d64937   #d64937 	#dedede
+	    inactive_workspace 	#333333   #333333 	#dedede
+	    urgent_workspace 	#c81700   #c81700 	#dedede
+	    active_workspace 	#555555   #555555 	#dedede
+	}
+        tray_output primary
+	    font pango:System San Francisco Display, FontAwesome 10
+}
+
+#Resize
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym ccedilla resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Shortcuts
+#Run a terminal
+bindsym $mod+Return exec urxvt
+
+#Kill a window
+bindsym $mod+Shift+q kill
+
+#Split in horizontal orientation
+bindsym $mod+h split h
+
+#Split in vertical orientation
+bindsym $mod+v split v
+
+#Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+#Change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+#Focus the parent container
+bindsym $mod+a focus parent
+
+#Fullscreen
+bindsym $mod+f fullscreen toggle
+
+#Reload the configuration file
+bindsym $mod+Shift+c reload
+
+#Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+#Exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+#Resize
+bindsym $mod+r mode "resize"
+
+#Suspender
+bindsym $mod+p exec sudo pm-suspend | playerctl pause | i3lock -i "/home/testei3/Imagens/windows.png" | playerctl pause
+
+#Change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+#Change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+#Move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+#Switch to workspace
+bindsym $mod+1 workspace $workspece1
+bindsym $mod+2 workspace $workspece2
+bindsym $mod+3 workspace $workspece3
+bindsym $mod+4 workspace $workspece4
+bindsym $mod+5 workspace $workspece5
+bindsym $mod+6 workspace $workspece6
+bindsym $mod+7 workspace $workspece7
+bindsym $mod+8 workspace $workspece8
+bindsym $mod+9 workspace $workspece9
+bindsym $mod+0 workspace $workspece10
+
+#Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspece1
+bindsym $mod+Shift+2 move container to workspace $workspece2
+bindsym $mod+Shift+3 move container to workspace $workspece3
+bindsym $mod+Shift+4 move container to workspace $workspece4
+bindsym $mod+Shift+5 move container to workspace $workspece5
+bindsym $mod+Shift+6 move container to workspace $workspece6
+bindsym $mod+Shift+7 move container to workspace $workspece7
+bindsym $mod+Shift+8 move container to workspace $workspece8
+bindsym $mod+Shift+9 move container to workspace $workspece9
+bindsym $mod+Shift+0 move container to workspace $workspece10
+
+# Multimedia keys
+#Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+#bindsym XF86AudioNext exec playerctl next
+#bindsym XF86AudioPrev exec playerctl previous
+#If the keyboard does not have all the multimedia keys
+bindsym $mod+n exec playerctl next
+bindsym $mod+Shift+n exec playerctl previous
+
+#Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% unmute #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% unmute #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86Calculator exec --no-startup-id gnome-calculator
+
+# Sreen brightness controls
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Touchpad controls
+#bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+
+# Programs
+#i3lock
+bindsym $mod+Shift+x exec playerctl pause | i3lock -i "/home/testei3/Imagens/windows.png"
+
+#Dmenu (rofi)
+bindsym $mod+d exec rofi -show run -l 1 -eh 1 -width 50 -bw 0 -bc "$text-color" -bg "$bg-color" -fg "$text-color" -hlbg "$indicator-color" -hlfg "$text-color" -font "System San Francisco Display 13"
+
+#Scot
+bindsym --release Print exec scrot -s '%H:%M:%S_%d-%m-%Y.jpg' -e 'mv $f ~/Imagens/screen_shots'
+bindsym --release $mod+Print exec scrot '%H:%M:%S_%d-%m-%Y.jpg' -e 'mv $f ~/Imagens/screen_shots'
+
+#htop
+bindsym $mod+Shift+h exec urxvt -e htop
+#Ranger
+bindsym $mod+Shift+m exec urxvt -e ranger
+
+#Gimp
+bindsym $mod+g exec gimp
+
+#Firefox
+bindsym $mod+Shift+f exec firefox
+
+# Startup programs
+
+#Clementine
+assign [class="Clementine"] "10 "
+exec_always clementine
+
+#Wallpaper (Nitrogen)
+exec --no-startup-id nitrogen --restore
+
+#Redshift
+exec --no-startup-id redshift -l -1.44:-48.45 -r -v
+
+# Colors
+#class			border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          $indicator-color
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator-color
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator-color
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $indicator-color

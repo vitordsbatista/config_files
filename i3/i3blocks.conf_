@@ -1,0 +1,166 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=~/.config/i3/blocks/$BLOCK_NAME
+separator_block_width=10
+#markup=pango
+markup=none
+color=#f3f4f5
+
+
+
+#Interessante, mas não por agora
+#[display]
+#label=
+#interval=5
+
+# Generic media player support
+#
+# This displays "ARTIST - SONG" if a music is playing.
+# Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
+
+# Key indicators
+#
+# Add the following bindings to i3 config file:
+#
+# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+#[keyindicator]
+#instance=CAPS
+#interval=once
+#signal=11
+
+#[keyindicator]
+#instance=NUM
+#interval=once
+#signal=11
+
+#[clickme]
+#full_text=Click me!
+#command=echo button=$BLOCK_BUTTON x=$BLOCK_X y=$BLOCK_Y
+#min_width=button=1 x=1366 y=768
+#align=left
+
+#Media Player
+[mediaplayer]
+instance=clementine
+#spotify
+label=
+interval=5
+signal=10
+
+[prev]
+instance=clementine
+interval=5
+
+[play_pause]
+instance=clementine
+interval=1
+
+[next]
+instance=clementine
+interval=5
+
+[volume]
+label=VOL
+label=
+instance=Master
+#instance=PCM
+interval=once
+signal=10
+# CPU usage
+#
+#[cpu_usage]
+#label=
+#interval=10
+#min_width=CPU: 100.00%
+[cpu]
+label=
+#interval=10
+interval=2
+# Memory usage
+#
+[memory]
+interval=5
+
+
+# Disc Space
+# Home
+#[space]
+#label=
+#interval=60
+# /
+#[space]
+#label=
+#instance=/
+#interval=60
+
+# Network
+#
+#[network]
+#label=
+#instance=eno1
+#interval=10
+
+# Wifi
+#
+#[network]
+#label=
+#instance=wlo1
+#interval=10
+
+# Brightness
+#
+[brightness]
+label=
+interval=1
+
+# Temperature
+#
+[temperature_2]
+instance=Core
+interval=5
+
+# Weather
+#
+[weather]
+instance=3405870
+interval=60
+
+# Date 
+#
+[time]
+command=date '+%d/%m/%Y'
+label=
+interval=5
+
+# Time
+#
+[time]
+command=date '+%H:%M'
+label=
+interval=5
+
